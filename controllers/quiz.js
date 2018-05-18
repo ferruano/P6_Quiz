@@ -154,52 +154,44 @@ exports.check = (req, res, next) => {
     });
 };
 
-
 exports.randomplay = (req, res, next) => {
 
-    req.session.randomPlay = req.session.randomPlay || [];
-    req.session.score =  req.session.score || 0;
-    const a = req.session.randomPlay;
-    const score = req.session.score   
-    models.quiz.findOne({where: {id: {[Sequelize.Op.notIn] : a }} ,order: [Sequelize.fn('RANDOM')] })
-    .then(quiz => {
-        if (quiz){
-            req.session.randomPlay.push(quiz.id); 
-            res.render('random_play', {quiz, score }); 
-        }
-        else {
-            delete req.session.randomPlay;
-            delete req.session.score;
-            res.render('random_nomore', {score});
-        }  
-    })
-   .catch(error => next(error));   
+    req.session.toBePlayed = req.session.toBePlayed || [];
+    req.session.score = req.session.score || 0;
+    toBePlayed = req.session.toBePlayed;
+    score = req.session.score;
+    models.quiz.findOne({where: {id: {[Sequelize.Op.notIn] : toBePlayed }} ,order: [Sequelize.fn('RANDOM')] })
+        .then(quiz => {
+
+            if (quiz){
+                req.session.toBePlayed.push(quiz.id);
+                res.render('quizzes/random_play', {score, quiz});
+            } else {
+                delete req.session.toBePlayed;
+                delete req.session.score;
+                res.render('quizzes/random_nomore', {score})
+            }
+        })
+        .catch(error => next(error));
+
 };
 
 exports.randomcheck = (req, res, next) => {
+
     let score = req.session.score;
-    models.quiz.findById(req.quiz.id)
-    .then(quiz =>{
+    const {quiz, query} = req;
+    const answer = query.answer || "";
 
-        if(quiz.answer === req.query['answer']){
-            req.session.score++;
-            score = req.session.score;
-            req.session.result = true;
-        }
+    if (quiz.answer.trim().toLowerCase() === answer.trim().toLowerCase()){
+        req.session.score++;
+        score = req.session.score;
+        req.session.result = true;
+    } else {
+        delete req.session.toBePlayed;
+        req.session.score = 0;
+        req.session.result = false;
+    }
 
-        else {
-            delete req.session.randomPlay;
-            req.session.score = 0;
-            req.session.result = false;
-        }
+    res.render('quizzes/random_result', {score, answer, result: req.session.result});
 
-        res.render('random_result', {
-            score: score, 
-            answer: req.query['answer'], 
-            result: req.session.result
-        });        
-    })
-    .catch(error => next(error)); 
-     
-    
 };
