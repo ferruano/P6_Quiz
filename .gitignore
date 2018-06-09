@@ -1,0 +1,6 @@
+node_modules
+.DS_Store
+quiz.sqlite
+.env
+node_modules
+node_modules
