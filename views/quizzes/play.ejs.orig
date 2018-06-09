@@ -1,8 +1,11 @@
 
+<<<<<<< HEAD
 <div class="right">
     <small> (by <%= quiz.author ? quiz.author.username : "Anonymous" %>) </small>
 </div>
 
+=======
+>>>>>>> practica7
 <h1>
     Play:
 </h1>
@@ -19,6 +22,7 @@
     </div>
 </form>
 
+<<<<<<< HEAD
 
 <h1>
     Tips:
@@ -36,3 +40,6 @@
 
 
 <a href="/goback"><button>Go back</button></a>
+=======
+<a href="/quizzes"><button>Go back</button></a>
+>>>>>>> practica7
