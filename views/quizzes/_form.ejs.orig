@@ -11,6 +11,10 @@
 </div>
 
 <br/>
+<<<<<<< HEAD
 <a href="/goback"><button type="button">Cancel</button></a>
+=======
+<a href="/quizzes"><button type="button">Cancel</button></a>
+>>>>>>> practica7
 
 <input type="submit" value="Save">

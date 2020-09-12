@@ -17,6 +17,7 @@
 <body>
 <div id="page">
     <header class="main" id="mainHeader">
+<<<<<<< HEAD
 
         <div class="right">
             <% if (!session.user) { %>
@@ -28,20 +29,26 @@
             <% } %>
         </div>
 
+=======
+>>>>>>> practica7
         <h1><span class="no-narrow">The</span> Quiz <span class="no-narrow">Site</span></h1>
     </header>
 
     <nav class="main" id="mainNav" role="navigation">
         <a href="/">Home</a>
         <a href="/quizzes">Quizzes</a>
+<<<<<<< HEAD
         <% if (session.user) { %>
             <a href="/users/<%= session.user.id %>/quizzes">My Quizzes</a>
         <% } %>
         <a href="/author">Author</a>
         <% if (session.user) { %>
             <a href="/users">Users</a>
-	<a href="/quizzes/randomplay">Play</a>
         <% } %>
+=======
+        <a href="/author">Author</a>
+        <a href="/quizzes/randomplay">Play</a>
+>>>>>>> practica7
     </nav>
 
     <section class="main" id="mainSection">
@@ -80,10 +87,13 @@
         <% } %>
 
         <%- body %>
+<<<<<<< HEAD
 
         <% if (locals.paginate_control) { %>
         <%- paginate_control %>
         <% } %>
+=======
+>>>>>>> practica7
     </section>
 
     <footer class="main" id="mainFooter">
